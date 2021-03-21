@@ -1,7 +1,7 @@
 import socket
 import os
 import array
-import pyfiglet 
+import pyfiglet
 from colorama import Fore, init
 
 def osclear():
@@ -14,7 +14,7 @@ def osclear():
 
 def design_elements(element):
     if element == 1:
-        print(Fore.LIGHTMAGENTA_EX + pyfiglet.figlet_format("BB_Parser", font = "chunky") + Fore.RESET)
+        print(Fore.LIGHTMAGENTA_EX + pyfiglet.figlet_format("BB_Parser", font="chunky") + Fore.RESET)
         print('=' * 60 + '\n')
     elif element == 2:
         print('=' * 60 + '\n')
@@ -35,7 +35,7 @@ def scan_port(ip, port):
 print('What are you using?')
 print('1. Linux')
 print('2. Windows')
-your_os= input('Enter your OS: ')
+your_os = input('Enter your OS: ')
 osclear()
 
 design_elements(1)
@@ -75,7 +75,7 @@ second_ip_element = int(split_starting_ip[1])
 third_ip_element = int(split_starting_ip[2])
 fourth_ip_element = int(split_starting_ip[3])
 
-unsplit_ip = str(first_ip_element) + '.' + str(second_ip_element) + '.' + str(third_ip_element) + '.' + str(fourth_ip_element)
+unsplit_ip = str(first_ip_element)+'.'+str(second_ip_element)+'.'+str(third_ip_element)+'.'+str(fourth_ip_element)
 
 successful_ips = []
 
@@ -96,7 +96,8 @@ while unsplit_ip != end_ip:
         first_ip_element += 1
         second_ip_element = 0
 
-    unsplit_ip = str(first_ip_element) + '.' + str(second_ip_element) + '.' + str(third_ip_element) + '.' + str(fourth_ip_element)
+    unsplit_ip = str(first_ip_element)+'.'+str(second_ip_element)+'.'+str(third_ip_element)+'.'+str(fourth_ip_element)
+
     fourth_ip_element += 1
 
 processing_ip_number = 0
