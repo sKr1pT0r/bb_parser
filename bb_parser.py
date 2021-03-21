@@ -5,58 +5,25 @@ import pyfiglet
 from colorama import Fore, init
 
 def osclear():
-    if youros == '1':
+    if your_os == '1':
         os.system('clear')
-    elif youros == '2':
+    elif your_os == '2':
         os.system('cls')
     else:
         exit()
 
-print('What are you using?')
-print('1. Linux')
-print('2. Windows')
-youros = input('Enter Your OS: ')
-osclear()
-print(Fore.LIGHTMAGENTA_EX + pyfiglet.figlet_format("BB_Parser", font = "chunky") + Fore.RESET)
-print('=' * 60 + '\n')
-print('Example: 1.1.1.1-2.2.2.2')
-iprange = input('Enter Ip Range: ')
-osclear()
-print(Fore.LIGHTMAGENTA_EX + pyfiglet.figlet_format("BB_Parser", font = "chunky") + Fore.RESET)
-print('=' * 60 + '\n')
-print('Example: 1-65535')
-portrange = input('Enter Port Range: ')
-osclear()
-print(Fore.LIGHTMAGENTA_EX + pyfiglet.figlet_format("BB_Parser", font = "chunky") + Fore.RESET)
-print('=' * 60 + '\n')
-print('Example: 25565')
-findport = int(input('Enter Find Port: '))
-osclear()
-
-portrangesplit = portrange.split('-')
-
-startport = int(portrangesplit[0])
-endport = int(portrangesplit[1])
-
-iprangesplit = iprange.split('-')
-startip = iprangesplit[0]
-endip = iprangesplit[1]
-
-startipsplit = startip.split('.')
-endipsplit = endip.split('.')
-
-element1 = int(startipsplit[0])
-element2 = int(startipsplit[1])
-element3 = int(startipsplit[2])
-element4 = int(startipsplit[3])
-
-unsplitip = str(element1) + '.' + str(element2) + '.' + str(element3) + '.' + str(element4)
-
-successful_ips = []
+def design_elements(element):
+    if element == 1:
+        print(Fore.LIGHTMAGENTA_EX + pyfiglet.figlet_format("BB_Parser", font = "chunky") + Fore.RESET)
+        print('=' * 60 + '\n')
+    elif element == 2:
+        print('=' * 60 + '\n')
+    elif element == 3:
+        print('\n' + '=' * 60 + '\n')
 
 def scan_port(ip, port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.settimeout(0.017)
+    sock.settimeout(port_scan_delay)
     try:
         connect = sock.connect((ip, port))
         print(ip, Fore.LIGHTYELLOW_EX + '- Port 25565 is open' + Fore.RESET)
@@ -65,42 +32,87 @@ def scan_port(ip, port):
     except:
         pass
 
-print(Fore.LIGHTMAGENTA_EX + pyfiglet.figlet_format("BB_Parser", font = "chunky") + Fore.RESET)
-print('=' * 60 + '\n')
+print('What are you using?')
+print('1. Linux')
+print('2. Windows')
+your_os= input('Enter your OS: ')
+osclear()
 
-while unsplitip != endip:
-    scan_port(unsplitip, findport)
+design_elements(1)
+print('Example: 1.1.1.1-2.2.2.2')
+ip_range = input('Enter Ip Range: ')
+osclear()
 
-    if element4 == 256:
-        element3 += 1
-        element4 = 0
+design_elements(1)
+print('Example: 1-65535')
+port_range = input('Enter rort range: ')
+osclear()
 
-    if element3 == 256:
-        element2 += 1
-        element3 = 0
+design_elements(1)
+print('Example: 25565')
+port_for_parsing = int(input('Enter the port for parsing: '))
+osclear()
 
-    if element2 == 256 and element1 < 256:
-        element1 += 1
-        element2 = 0
+design_elements(1)
+print('Recommended: 1, 0.5, 0.35, 0.25, 0.1, 0.05, 0.025, 0.0175')
+port_scan_delay = float(input('Enter port scan delay: '))
+osclear()
 
-    unsplitip = str(element1) + '.' + str(element2) + '.' + str(element3) + '.' + str(element4)
+split_port_range = port_range.split('-')
 
-    element4 += 1
+starting_port = int(split_port_range[0])
+end_port = int(split_port_range[1])
 
-si_num = 0
-print('\n' + '=' * 60 + '\n')
+split_range_ip = ip_range.split('-')
+starting_ip = split_range_ip[0]
+end_ip = split_range_ip[1]
 
-while si_num != len(successful_ips):
-    port = int(startport)
-    while port != endport:
+split_starting_ip = starting_ip.split('.')
+split_end_ip = end_ip.split('.')
+
+first_ip_element = int(split_starting_ip[0])
+second_ip_element = int(split_starting_ip[1])
+third_ip_element = int(split_starting_ip[2])
+fourth_ip_element = int(split_starting_ip[3])
+
+unsplit_ip = str(first_ip_element) + '.' + str(second_ip_element) + '.' + str(third_ip_element) + '.' + str(fourth_ip_element)
+
+successful_ips = []
+
+design_elements(1)
+
+while unsplit_ip != end_ip:
+    scan_port(unsplit_ip, port_for_parsing)
+
+    if fourth_ip_element == 256:
+        third_ip_element += 1
+        fourth_ip_element = 0
+
+    if third_ip_element == 256:
+        second_ip_element += 1
+        third_ip_element = 0
+
+    if second_ip_element == 256 and first_ip_element <= 255:
+        first_ip_element += 1
+        second_ip_element = 0
+
+    unsplit_ip = str(first_ip_element) + '.' + str(second_ip_element) + '.' + str(third_ip_element) + '.' + str(fourth_ip_element)
+    fourth_ip_element += 1
+
+processing_ip_number = 0
+design_elements(3)
+
+while processing_ip_number != len(successful_ips):
+    port = int(starting_port)
+    while port != end_port:
         try:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            sock.settimeout(0.017)
-            connect = sock.connect((successful_ips[si_num], port))
-            print(successful_ips[si_num], Fore.LIGHTGREEN_EX + '- Port', port, 'is open' + Fore.RESET)
+            sock.settimeout(port_scan_delay)
+            connect = sock.connect((successful_ips[processing_ip_number], port))
+            print(successful_ips[processing_ip_number], Fore.LIGHTGREEN_EX + '- Port', port, 'is open' + Fore.RESET)
             connect.close()
             port += 1
         except:
             port += 1
             pass
-    si_num += 1
+    processing_ip_number += 1
