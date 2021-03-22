@@ -2,7 +2,13 @@ import socket
 import os
 import array
 import pyfiglet
+import sys
 from colorama import Fore, init
+
+if sys.argv[1] == "-h" or sys.argv[2] == "--help":
+    print("py bb_parser_nogui.py (ip range) (your os) (port range) (port for parsing) (port scan delay)")
+    print("(Example: py bb_parser_cmd.py 1.1.1.1-2.2.2.2 linux 1-65535 80 0.02)")
+    exit()
 
 def osclear():
     if your_os == '1':
@@ -32,31 +38,11 @@ def scan_port(ip, port):
     except:
         pass
 
-print('What are you using?')
-print('1. Linux')
-print('2. Windows')
-your_os = input('Enter your OS: ')
-osclear()
-
-design_elements(1)
-print('Example: 1.1.1.1-2.2.2.2')
-ip_range = input('Enter Ip Range: ')
-osclear()
-
-design_elements(1)
-print('Example: 1-65535')
-port_range = input('Enter port range: ')
-osclear()
-
-design_elements(1)
-print('Example: 25565')
-port_for_parsing = int(input('Enter the port for parsing: '))
-osclear()
-
-design_elements(1)
-print('Recommended: 1, 0.5, 0.35, 0.25, 0.1, 0.05, 0.025, 0.0175')
-port_scan_delay = float(input('Enter port scan delay: '))
-osclear()
+ip_range = str(sys.argv[1])
+your_os = str(sys.argv[2])
+port_range = sys.argv[3]
+port_for_parsing = int(sys.argv[4])
+port_scan_delay = float(sys.argv[5])
 
 split_port_range = port_range.split('-')
 
